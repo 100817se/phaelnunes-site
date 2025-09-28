@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Minha Namorada extremamente dramatica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e0f7ff 0%, #ffe6f2 100%);
+            color: #333;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Página Inicial */
+        #home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6b9d;
+            transform: rotate(45deg);
+            opacity: 0.7;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        .heart:before, .heart:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background-color: #ff6b9d;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart:after {
+            top: 0;
+            left: -10px;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(45deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(45deg);
+            }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #4a6fa5;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: #ff6b9d;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #4a6fa5, #6a8cc7);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(45deg, #6a8cc7, #4a6fa5);
+        }
+
+        /* Página de Mensagem */
+        #message {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        #message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            z-index: 0;
+        }
+
+        .message-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .highlight {
+            color: #ff6b9d;
+            font-weight: bold;
+        }
+
+        /* Galeria */
+        #gallery {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 250px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #4a6fa5;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .message-text {
+                font-size: 1.1rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Página Inicial -->
+    <section id="home" class="container">
+        <div class="hearts-container" id="hearts"></div>
+        <h1>Para Minha Namorada extremamente dramatica rsrs</h1>
+        <p class="subtitle">Clique para descobrir uma surpresa!</p>
+        <button class="btn" onclick="showMessage()">Continuar ❤️</button>
+    </section>
+
+    <!-- Página de Mensagem -->
+    <section id="message" class="container">
+        <div class="message-content">
+            <h2 class="section-title">Para Você, Gostosa</h2>
+            <div class="message-text">
+                <p>Minha dramatica,</p>
+                <p>Moh desde quando você entrou em minha vida, tudo melhorou, até pq eu ja te desejava de tempo nee, Cada momento ao teu lado é muito bom e fico sempre imaginando os detalhes quando chego em casa, teu olhar, teu abraço e teu beijo que é muito bom pqp...</p>
+                <p>Você é a pessoa mais incrível que eu já conheci, sou grato por me escolher para estar do seu lado, eu sei que ainda não pedi você em namoro, não pensa que não sei disso, eu tô resolvendo isso, eu nem queria falar nada, mas tenho que falar pq você acha q eu não ligo pra isso, tu já falou isso varias vezes para mim como forma de indireta e eu sempre fico caldo kkkk, mas preocupa não amor, tenha só mais um pouquinho de paciência 🩷.</p>
+                <p>Eu te amo muito. Você é meu <span class="highlight">sol</span> nos dias nublados, minha <span class="highlight">luz</span> na escuridão e minha <span class="highlight">razão</span> para sorrir todos os dias.</p>
+                <p>Eu dediquei minha folga para testar meu conhecimentos, resolvi fazer esse site e a única ideia que veio na cabeça foi você, então resolvi dedicar a vocêe, espero que goste 🤍</p>
+                <p style="text-align: right; margin-top: 20px;"><strong>Seu Homem, Fhael Nunes</strong></p>
+            </div>
+            <button class="btn" onclick="showGallery()">Clique Aqui moh❤️</button>
+        </div>
+    </section>
+
+    <!-- Galeria de Fotos -->
+    <section id="gallery" class="container">
+        <h2 class="section-title">Alguns momentos ao seu lado</h2>
+        <p class="subtitle">Alguns de nossos momentos juntos</p>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="imagens/foto1.jpg" alt="Nossa foto especial 1">
+            </div>
+            <div class="gallery-item">
+                <img src="imagens/foto2.jpg" alt="Nossa foto especial 2">
+            </div>
+            <div class="gallery-item">
+                <img src="imagens/foto3.jpg" alt="Nossa foto especial 3">
+            </div>
+            <div class="gallery-item">
+                <img src="imagens/foto4.jpg" alt="Nossa foto especial 4">
+            </div>
+            <div class="gallery-item">
+                <img src="imagens/foto5.jpg" alt="Nossa foto especial 5">
+            </div>
+            <div class="gallery-item">
+                <img src="imagens/foto6.jpg" alt="Nossa foto especial 6">
+            </div>
+            <div class="gallery-item">
+                <img src="imagens/foto7.jpg" alt="Nossa foto especial 7">
+            </div>
+            <div class="gallery-item">
+                <img src="imagens/foto8.JPG" alt="Nossa foto especial 8">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Criar corações flutuantes
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const heartCount = 20;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                // Posição aleatória
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                
+                // Tamanho aleatório
+                const size = Math.random() * 20 + 10;
+                
+                // Cor aleatória entre rosa e azul
+                const colors = ['#ff6b9d', '#ff8fab', '#4a6fa5', '#6a8cc7'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Atraso de animação aleatório
+                const delay = Math.random() * 5;
+                
+                heart.style.left = `${left}%`;
+                heart.style.top = `${top}%`;
+                heart.style.width = `${size}px`;
+                heart.style.height = `${size}px`;
+                heart.style.backgroundColor = color;
+                heart.style.animationDelay = `${delay}s`;
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // Mostrar a página de mensagem
+        function showMessage() {
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('message').style.display = 'block';
+            
+            // Adicionar uma imagem de fundo para a mensagem (use uma das suas fotos)
+            document.getElementById('message').style.backgroundImage = "url('imagens/foto1.jpg')";
+        }
+        
+        // Mostrar a galeria
+        function showGallery() {
+            document.getElementById('message').style.display = 'none';
+            document.getElementById('gallery').style.display = 'block';
+        }
+        
+        // Inicializar corações quando a página carregar
+        window.onload = function() {
+            createHearts();
+        };
+    </script>
+</body>
+</html>
